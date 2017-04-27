@@ -4,28 +4,30 @@ require_once('db.php');
 <head>
 <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'></head>
 <script>
-var activeSong;
+
 var i=0;
+var activeSong;
 var seekBar = document.getElementById('seek-bar');
 function xplay(id){
-if(i==0)
-    {
 document.getElementById('play').innerHTML='pause';
-activeSong = document.getElementById('a');
-//alert(name);
-activeSong.src=id+".mp3";
-    activeSong.play();
+activeSong=document.getElementById('a');
+activeSong.src="music/"+id+".mp3";
+activeSong.play();
 i=1;
-
 }
-else
-{document.getElementById('play').innerHTML='play_arrow';
- activeSong.pause();
+function play(){
+if(i==1)
+{activeSong.pause();
+document.getElementById('play').innerHTML='play_arrow';
 i=0;
 }
-
-
+else
+{activeSong.play();
+document.getElementById('play').innerHTML='pause';
 }
+}
+
+
 function updateTextInput(val) {
          activeSong.currentTime=(val*activeSong.duration)/100;
         }
@@ -49,7 +51,7 @@ function setVolume(volume) {
 <br><br>
 <a href='#' style='text-decoration:none;color:black;font-size:30px'>
 <i class='material-icons' style='font-size:30px'>skip_previous</i></a>
-<a onclick='xplay()' style='cursor:pointer;'  >
+<a onclick="play()" style='cursor:pointer;'  >
 <i class='material-icons' style='font-size:30px' id='play'>play_arrow</i></a>
 <a href='#' style='text-decoration:none;color:black'><i class='material-icons' style='font-size:30px'>skip_next</i></a>
 <input type='range' id='seek-bar' value='0'  onchange='updateTextInput(this.value);' style='width:50%;background-color:#DCDCDC'>
